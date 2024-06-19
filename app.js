@@ -36,7 +36,7 @@ async function fetchNews(region = 'us', category = 'general') {
     displayNews(data.articles);
   } catch (error) {
     console.error('Error fetching news:', error); // Debugging line
-    newsContainer.innerHTML = '<div class="loading">Failed to fetch news. Please try again later.</div>';
+    newsContainer.innerHTML = `<div class="loading">Failed to fetch news. Error: ${error.message}</div>`;
   }
 }
 
@@ -54,4 +54,5 @@ function displayNews(articles) {
     newsContainer.appendChild(newsCard);
   });
 }
+
 

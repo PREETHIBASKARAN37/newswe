@@ -4,16 +4,15 @@ const regionSelect = document.getElementById('region-select');
 const categorySelect = document.getElementById('category-select');
 
 async function fetchNews(region = 'us', category = 'general') {
-    const url = https://newsapi.org/v2/top-headlines?country=${region}&category=${category}&apiKey=${apiKey};
-    console.log(Fetching news from: ${url}); // Debugging line
+    const url = `https://newsapi.org/v2/top-headlines?country=${region}&category=${category}&apiKey=${apiKey}`;
+    console.log('Fetching news from:', url); // Debugging line
 
     try {
         newsContainer.innerHTML = '<div class="loading">Loading...</div>';
         const response = await fetch(url);
-        console.log('API response status:', response.status); // Debugging line
 
         if (!response.ok) {
-            throw new Error(HTTP error! status: ${response.status});
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const data = await response.json();
@@ -32,7 +31,7 @@ async function fetchNews(region = 'us', category = 'general') {
 }
 
 function displayNews(articles) {
-    newsContainer.innerHTML = '';
+    newsContainer.innerHTML = ''; // Clear previous articles
     articles.forEach(article => {
         const newsCard = document.createElement('div');
         newsCard.className = 'news-card';

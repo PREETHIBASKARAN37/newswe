@@ -1,58 +1,77 @@
-const apiKey = '4d057832f4124a38ada745d8a470b29a'; // Replace with your actual API key
-const apiUrl = 'https://newsapi.org/v2/top-headlines';
-const newsContainer = document.getElementById('news-container');
-const regionSelect = document.getElementById('region-select');
-const categorySelect = document.getElementById('category-select');
-const fetchNewsBtn = document.getElementById('fetch-news-btn');
+import React, { useState, useEffect } from 'react';
+import './App.css';
 
-// Event listener for Fetch News button click
-fetchNewsBtn.addEventListener('click', () => {
-  const region = regionSelect.value;
-  const category = categorySelect.value;
-  fetchNews(region, category);
-});
+const API_KEY = '4d057832f4124a38ada745d8a470b29a'; // Your provided API key
+const API_URL = 'https://newsapi.org/v2/top-headlines';
 
-// Function to fetch news based on region and category
-async function fetchNews(region = 'us', category = 'general') {
-  const url = `${apiUrl}?country=${region}&category=${category}&apiKey=${apiKey}`;
-  console.log(`Fetching news from: ${url}`); // Debugging line
+function App() {
+  const [category, setCategory] = useState('general');
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  try {
-    newsContainer.innerHTML = '<div class="loading">Loading...</div>';
-    const response = await fetch(url);
+  useEffect(() => {
+    fetchNews(category);
+  }, [category]);
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+  const fetchNews = async (category) => {
+    const url = `${API_URL}?country=in&category=${category}&apiKey=${API_KEY}`;
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(`HTTP error! status: ${response.status}, message: ${errorData.message}`);
+      }
+      const data = await response.json();
+      setArticles(data.articles);
+    } catch (error) {
+      setError(error.message);
     }
+    setLoading(false);
+  };
 
-    const data = await response.json();
-    console.log('API response data:', data); // Debugging line
-
-    if (data.articles.length === 0) {
-      newsContainer.innerHTML = '<div class="loading">No news found for this selection.</div>';
-      return;
-    }
-
-    displayNews(data.articles);
-  } catch (error) {
-    console.error('Error fetching news:', error); // Debugging line
-    newsContainer.innerHTML = `<div class="loading">Failed to fetch news. Error: ${error.message}</div>`;
-  }
+  return (
+    <div className="App">
+      <header>
+        <h1>India News Dashboard</h1>
+        <div id="controls">
+          <select value={category} onChange={(e) => setCategory(e.target.value)}>
+            <option value="general">General</option>
+            <option value="sports">Sports</option>
+            <option value="business">Business</option>
+            <option value="technology">Technology</option>
+            {/* Add more categories as needed */}
+          </select>
+        </div>
+      </header>
+      <main>
+        {loading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p>Error fetching news: {error}</p>
+        ) : (
+          <div id="newsContainer" className="news-container">
+            {articles.map((article, index) => (
+              <div key={index} className="news-card">
+                {article.urlToImage && (
+                  <img src={article.urlToImage} alt={article.title} />
+                )}
+                <h2>{article.title}</h2>
+                <p>{article.description}</p>
+                <a href={article.url} target="_blank" rel="noopener noreferrer">
+                  Read more
+                </a>
+              </div>
+            ))}
+          </div>
+        )}
+      </main>
+    </div>
+  );
 }
 
-// Function to display news articles in the UI
-function displayNews(articles) {
-  newsContainer.innerHTML = '';
-  articles.forEach(article => {
-    const newsCard = document.createElement('div');
-    newsCard.className = 'news-card';
-    newsCard.innerHTML = `
-      <h2>${article.title}</h2>
-      <p>${article.description}</p>
-      <a href="${article.url}" target="_blank">Read more</a>
-    `;
-    newsContainer.appendChild(newsCard);
-  });
-}
+export default App;
 
 

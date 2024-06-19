@@ -1,47 +1,107 @@
+/* styles.css */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: #f7f7f7;
+  color: #333;
+  margin: 0;
+  padding: 0;
 }
 
-header {
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    text-align: center;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1em;
 }
 
-header div {
-    margin: 10px;
+.header {
+  background-color: #002d72;
+  color: #fff;
+  padding: 1em;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-#news-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
+.header h1 {
+  font-size: 2.5em;
+  margin: 0;
+}
+
+.filters {
+  margin-top: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.filters label {
+  margin-right: 0.5em;
+}
+
+.filters select {
+  padding: 0.5em;
+  font-size: 1em;
+  margin-right: 1em;
+}
+
+.filters button {
+  padding: 0.5em 1em;
+  background-color: #002d72;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5em;
+  margin-top: 2em;
 }
 
 .news-card {
-    background: white;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 10px;
-    padding: 15px;
-    width: 300px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.news-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .news-card h2 {
-    font-size: 1.5em;
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+  color: #002d72;
 }
 
 .news-card p {
-    font-size: 1em;
+  font-size: 1em;
+  line-height: 1.4;
+  color: #666;
+  margin-bottom: 1em;
+}
+
+.news-card a {
+  color: #004a99;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 1em;
+  transition: color 0.3s ease-in-out;
+}
+
+.news-card a:hover {
+  color: #002d72;
 }
 
 .loading {
-    font-size: 1.2em;
-    text-align: center;
-    margin: 20px;
+  text-align: center;
+  margin-top: 2em;
+  font-size: 1.2em;
+  color: #666;
 }

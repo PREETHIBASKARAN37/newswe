@@ -1,4 +1,4 @@
-const apiKey = 'YOUR_ACTUAL_API_KEY'; // Replace with your actual API key
+const apiKey = '4d057832f4124a38ada745d8a470b29a'; // Replace with your actual API key
 const newsContainer = document.getElementById('news-container');
 const regionSelect = document.getElementById('region-select');
 const categorySelect = document.getElementById('category-select');

@@ -1,40 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>News Dashboard</h1>
-        <div>
-            <label for="region-select">Select Region:</label>
-            <select id="region-select">
-                <option value="us">United States</option>
-                <option value="gb">United Kingdom</option>
-                <option value="ca">Canada</option>
-                <option value="au">Australia</option>
-                <option value="world">World</option>
-            </select>
-        </div>
-        <div>
-            <label for="category-select">Select Category:</label>
-            <select id="category-select">
-                <option value="general">General</option>
-                <option value="business">Business</option>
-                <option value="entertainment">Entertainment</option>
-                <option value="health">Health</option>
-                <option value="science">Science</option>
-                <option value="sports">Sports</option>
-                <option value="technology">Technology</option>
-            </select>
-        </div>
+  <div class="container">
+    <header class="header">
+      <h1>Latest News</h1>
+      <div class="filters">
+        <label for="region-select">Region:</label>
+        <select id="region-select">
+          <option value="us">United States</option>
+          <option value="gb">Great Britain</option>
+          <option value="in">India</option>
+          <!-- Add more options for different regions -->
+        </select>
+
+        <label for="category-select">Category:</label>
+        <select id="category-select">
+          <option value="general">General</option>
+          <option value="business">Business</option>
+          <option value="technology">Technology</option>
+          <!-- Add more options for different categories -->
+        </select>
+        <button id="fetch-news-btn">Fetch News</button>
+      </div>
     </header>
-    <main id="news-container">
-        <!-- News cards will be injected here -->
-    </main>
-    <script src="app.js"></script>
+
+    <div id="news-container" class="news-grid">
+      <!-- News articles will be dynamically added here -->
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
+
